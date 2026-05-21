@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday — Most Beautiful Girl on Earth 🌍</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #ff6b9d;
+    --rose: #ff3d7f;
+    --gold: #ffd700;
+    --purple: #a855f7;
+    --deep: #0d0010;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── GAUSSIAN BLOBS ── */
+  .blobs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.45;
+    animation: blobMove 12s ease-in-out infinite alternate;
+  }
+  .blob1 { width: 500px; height: 500px; background: #ff3d7f; top: -100px; left: -100px; animation-duration: 14s; }
+  .blob2 { width: 400px; height: 400px; background: #a855f7; top: 30%; right: -80px; animation-duration: 10s; animation-delay: -4s; }
+  .blob3 { width: 350px; height: 350px; background: #ffd700; bottom: 10%; left: 20%; animation-duration: 16s; animation-delay: -8s; }
+  .blob4 { width: 300px; height: 300px; background: #ff6b9d; top: 60%; right: 25%; animation-duration: 11s; animation-delay: -2s; }
+  .blob5 { width: 250px; height: 250px; background: #7c3aed; bottom: -60px; right: -60px; animation-duration: 13s; animation-delay: -6s; }
+
+  @keyframes blobMove {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(40px, -30px) scale(1.08); }
+    66%  { transform: translate(-20px, 40px) scale(0.95); }
+    100% { transform: translate(30px, 20px) scale(1.05); }
+  }
+
+  /* ── CONFETTI ── */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    z-index: 999;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── FLOATING HEARTS ── */
+  .hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 1.5rem;
+    animation: floatUp linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) scale(1); opacity: 0.7; }
+    80%  { opacity: 0.4; }
+    100% { transform: translateY(-110vh) scale(0.5); opacity: 0; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .crown { font-size: 4rem; animation: bounce 1.5s infinite; display: block; margin-bottom: 10px; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, #ffd700 40%, #ff6b9d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.8s;
+  }
+
+  .hero-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 9vw, 7rem);
+    color: var(--pink);
+    text-shadow: 0 0 40px rgba(255,107,157,0.8);
+    display: block;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: rgba(255,255,255,0.75);
+    margin-top: 20px;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.6s;
+  }
+
+  .scroll-hint {
+    margin-top: 50px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 2.2s;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .scroll-hint span { display: block; animation: bounce 1.5s infinite; font-size: 1.5rem; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    position: relative;
+    z-index: 10;
+    padding: 80px 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffd700, #ff6b9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    margin: 0 auto 50px;
+    border-radius: 2px;
+  }
+
+  /* ── PHOTO GALLERY ── */
+  .gallery-section { background: rgba(255,255,255,0.02); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .photo-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(255, 61, 127, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .photo-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 61, 127, 0.5);
+  }
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .photo-card:hover img { transform: scale(1.08); }
+  .photo-card .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  .photo-card:hover .overlay { opacity: 1; }
+  .photo-card .overlay span {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 0 80px rgba(255, 107, 157, 0.5);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px; right: 28px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    user-select: none;
+    padding: 10px;
+  }
+  .lightbox-nav:hover { opacity: 1; }
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+
+  /* ── LOVE LETTER ── */
+  .letter-box {
+    max-width: 760px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,107,157,0.2);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 80px rgba(255,61,127,0.1);
+  }
+  .letter-box .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--pink);
+    opacity: 0.3;
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .letter-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    line-height: 1.9;
+    color: rgba(255,255,255,0.88);
+  }
+  .letter-sign {
+    margin-top: 40px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--gold);
+  }
+
+  /* ── REASONS ── */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .reason-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .reason-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 107, 157, 0.5);
+  }
+  .reason-card .icon { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+  .reason-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .reason-card p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  /* ── FINAL BANNER ── */
+  .final-banner {
+    text-align: center;
+    padding: 100px 20px;
+    background: radial-gradient(ellipse at center, rgba(255,61,127,0.15) 0%, transparent 70%);
+  }
+  .final-banner h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: #fff;
+    text-shadow: 0 0 60px rgba(255,107,157,0.8);
+  }
+  .final-banner p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 16px;
+  }
+  .heart-big { font-size: 5rem; display: block; margin: 30px auto; animation: pulse 1.5s infinite; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .blob1 { width: 280px; height: 280px; }
+    .blob2 { width: 220px; height: 220px; }
+    .blob3 { width: 200px; height: 200px; }
+    .blob4 { width: 180px; height: 180px; }
+    .blob5 { width: 160px; height: 160px; }
+
+    .hero { padding: 60px 16px 40px; min-height: 100svh; }
+    .crown { font-size: 3rem; }
+    .hero-subtitle { font-size: 1rem; letter-spacing: 2px; }
+    .hero-tagline { font-size: 0.95rem; }
+    .scroll-hint { margin-top: 30px; }
+
+    section { padding: 60px 16px; }
+
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .photo-card { border-radius: 14px; }
+
+    .reasons-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .reason-card { padding: 20px 14px; }
+    .reason-card .icon { font-size: 2rem; }
+
+    .letter-box { padding: 28px 18px; }
+    .letter-box .quote-mark { font-size: 5rem; }
+    .letter-text { font-size: 1rem; }
+    .letter-sign { font-size: 1.5rem; }
+
+    .final-banner { padding: 70px 16px; }
+    .heart-big { font-size: 3.5rem; }
+
+    .lightbox-nav { font-size: 2rem; }
+    .lightbox-prev { left: 4px; }
+    .lightbox-next { right: 4px; }
+  }
+
+  @media (max-width: 400px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .reasons-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .reason-card h3 { font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Gaussian Blobs -->
+<div class="blobs">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+  <div class="blob blob5"></div>
+</div>
+
+<!-- Floating Hearts -->
+<div class="hearts-container" id="hearts"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&#10005;</span>
+  <span class="lightbox-nav lightbox-prev" onclick="changePhoto(-1)">&#10094;</span>
+  <img id="lightbox-img" src="" alt="">
+  <span class="lightbox-nav lightbox-next" onclick="changePhoto(1)">&#10095;</span>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <span class="crown">&#128081;</span>
+  <p class="hero-subtitle">Today the Universe celebrates</p>
+  <h1 class="hero-title">
+    Happy Birthday
+    <span class="hero-name">Poojashree</span>
+  </h1>
+  <p class="hero-tagline">
+    The most beautiful girl on this earth — and in every universe that exists.
+    You are not just a blessing, you are the reason stars shine brighter.
+  </p>
+  <div class="scroll-hint">
+    <span>&#8595;</span>
+    scroll to feel the love
+  </div>
+</section>
+
+<!-- ── PHOTO GALLERY ── -->
+<section class="gallery-section">
+  <h2 class="section-title">Her Beautiful World</h2>
+  <div class="section-line"></div>
+  <div class="gallery-grid" id="gallery"></div>
+</section>
+
+<!-- ── REASONS ── -->
+<section>
+  <h2 class="section-title">Why You Are The Most Beautiful</h2>
+  <div class="section-line"></div>
+  <div class="reasons-grid">
+    <div class="reason-card">
+      <span class="icon">&#10024;</span>
+      <h3>Your Eyes</h3>
+      <p>They hold the universe — deep, warm, and full of magic that no star can match.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">&#128516;</span>
+      <h3>Your Smile</h3>
+      <p>One smile from you can brighten the darkest room on the darkest day.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">&#128150;</span>
+      <h3>Your Heart</h3>
+      <p>Pure, kind, and full of love. That is the rarest kind of beauty in this world.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">&#128081;</span>
+      <h3>Your Soul</h3>
+      <p>You carry grace in everything you do. You are a queen in every sense of the word.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">&#127775;</span>
+      <h3>Your Strength</h3>
+      <p>You face life with courage and love. That makes you more beautiful than words can say.</p>
+    </div>
+    <div class="reason-card">
+      <span class="icon">&#127800;</span>
+      <h3>Your Presence</h3>
+      <p>The world is a better, brighter, more beautiful place simply because you exist in it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOVE LETTER ── -->
+<section>
+  <h2 class="section-title">A Letter Just For You</h2>
+  <div class="section-line"></div>
+  <div class="letter-box">
+    <span class="quote-mark">&ldquo;</span>
+    <p class="letter-text" id="letter-text"></p>
+    <p class="letter-sign">— Forever Yours, Sudhir</p>
+  </div>
+</section>
+
+<!-- ── FINAL BANNER ── -->
+<div class="final-banner">
+  <span class="heart-big">&#10084;&#65039;</span>
+  <h2>Happy Birthday, My Love</h2>
+  <p>May every single day of your life be as beautiful as you are.</p>
+  <p style="margin-top:10px; color: rgba(255,255,255,0.35); font-size:0.9rem;">mostbeautifulgirlonearth.com — because that is exactly what you are.</p>
+</div>
+
+<footer>Made with infinite love &nbsp;&#10084;&#65039;&nbsp; for the most beautiful girl on earth</footer>
+
+<script>
+  // ── PHOTOS ──
+  const photos = [
+    "images/received_1682691998683856.jpeg",
+    "images/received_1682692225350500.jpeg",
+    "images/received_1682692745350448.jpeg",
+    "images/received_510414935801498.jpeg",
+    "images/received_511506369025688.jpeg",
+    "images/received_511522615690730.jpeg",
+    "images/received_511734699002855.jpeg",
+    "images/received_511934005649591.jpeg",
+    "images/received_512184322291226.jpeg",
+    "images/received_512825165560475.jpeg",
+    "images/received_514198708756454.jpeg",
+    "images/received_514585432051115.jpeg"
+  ];
+
+  const captions = [
+    "Simply stunning", "My queen", "Gorgeous", "Beautiful soul",
+    "That smile", "Pure magic", "Beyond words", "My everything",
+    "Radiant", "Heaven sent", "My universe", "Forever mine"
+  ];
+
+  const gallery = document.getElementById('gallery');
+  photos.forEach((src, i) => {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.innerHTML = `
+      <img src="${src}" alt="Poojashree" loading="lazy">
+      <div class="overlay"><span>${captions[i]}</span></div>
+    `;
+    card.addEventListener('click', () => openLightbox(i));
+    gallery.appendChild(card);
+  });
+
+  // ── LIGHTBOX ──
+  let currentPhoto = 0;
+  function openLightbox(i) {
+    currentPhoto = i;
+    document.getElementById('lightbox-img').src = photos[i];
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  function changePhoto(dir) {
+    currentPhoto = (currentPhoto + dir + photos.length) % photos.length;
+    document.getElementById('lightbox-img').src = photos[currentPhoto];
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changePhoto(-1);
+    if (e.key === 'ArrowRight') changePhoto(1);
+  });
+
+  // ── LOVE LETTER TYPEWRITER ──
+  const letterEl = document.getElementById('letter-text');
+  const letterContent = `My dearest Poojashree,\n\nOn this very special day, I want the world to know what I have always known — you are the most beautiful girl on this earth. Not just because of your face, your eyes, or your smile — though all of that steals my breath every single time. But because of who you are. The way you laugh. The way you care. The way you make every ordinary moment feel like the most precious thing in the universe.\n\nBeing with you is the greatest gift life has ever given me. You are my home, my heart, my greatest adventure. I could travel to every corner of this earth and still not find anyone as incredible as you.\n\nToday is YOUR day. The day the universe gave us the gift of YOU. And I thank every star, every prayer, and every moment that brought us together.\n\nHappy Birthday, my love. Here's to you — forever and always.`;
+
+  let idx = 0;
+  const formatted = letterContent.replace(/\n/g, '<br>');
+  const plain = letterContent;
+
+  function typeWriter() {
+    if (idx <= plain.length) {
+      let display = plain.substring(0, idx).replace(/\n/g, '<br>');
+      letterEl.innerHTML = display + (idx < plain.length ? '<span style="opacity:0.6">|</span>' : '');
+      idx++;
+      setTimeout(typeWriter, idx < 50 ? 60 : 18);
+    }
+  }
+
+  const letterSection = document.querySelector('.letter-box');
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { typeWriter(); observer.disconnect(); }
+  }, { threshold: 0.3 });
+  observer.observe(letterSection);
+
+  // ── CONFETTI ──
+  const colors = ['#ff3d7f','#ffd700','#a855f7','#ff6b9d','#fff','#7c3aed','#f97316'];
+  function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left: ${Math.random()*100}vw;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6 + Math.random()*8}px;
+        height: ${6 + Math.random()*8}px;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+        animation-duration: ${2.5 + Math.random()*3}s;
+        animation-delay: ${Math.random()*2}s;
+      `;
+      document.body.appendChild(piece);
+      piece.addEventListener('animationend', () => piece.remove());
+    }
+  }
+  setTimeout(launchConfetti, 500);
+  setTimeout(launchConfetti, 3500);
+
+  // ── FLOATING HEARTS ──
+  const heartEmojis = ['❤️','💖','💕','💗','💓','✨','🌸'];
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    h.style.cssText = `
+      left: ${Math.random()*100}%;
+      font-size: ${0.8 + Math.random()*1.5}rem;
+      animation-duration: ${5 + Math.random()*8}s;
+      animation-delay: ${Math.random()*2}s;
+    `;
+    document.getElementById('hearts').appendChild(h);
+    h.addEventListener('animationend', () => h.remove());
+  }
+  setInterval(spawnHeart, 600);
+</script>
+</body>
+</html>
